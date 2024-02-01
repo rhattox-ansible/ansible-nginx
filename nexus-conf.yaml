@@ -31,7 +31,7 @@
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto "https";
-            proxy_pass http://localhost:8081/nexus/repository/docker-hosted/$request_uri;
+            proxy_pass http://localhost:8081/nexus/repository/docker-group/$request_uri;
           }
           location /v1 {
             client_max_body_size 1G;
@@ -39,7 +39,7 @@
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto "https";
-            proxy_pass http://localhost:8081/repository/docker-hosted/$request_uri;
+            proxy_pass http://localhost:8081/repository/docker-group/$request_uri;
           }
         dest: "/opt/nginx/nexus-service.conf"
         owner: "{{ ansible_user_id }}"
