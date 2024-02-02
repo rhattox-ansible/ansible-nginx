@@ -1,4 +1,4 @@
-- name: Install Cert Manager
+- name: Install Nexus Nginx Proxy Reverse Configuration 
   hosts: localhost
   become: true
   gather_facts: true
