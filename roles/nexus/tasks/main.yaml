@@ -1,0 +1,15 @@
+- name: Configure Nexus Reverse Proxy
+  ansible.builtin.template:
+    src: roles/nexus/templates/nexus.conf.j2
+    dest: "/etc/nginx/sites-available/nexus.conf"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: Create Nexus Link
+  ansible.builtin.file:
+    state: link
+    owner: "root"
+    group: "root"
+    mode: "0755"
+    path: "/etc/nginx/sites-enabled/nexus"

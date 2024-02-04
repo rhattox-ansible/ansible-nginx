@@ -1,88 +1,10 @@
-- name: Install Cert Manager
+- name: Nginx CertBot HTTPS Installation
   hosts: localhost
   become: true
+  gather_facts: true
 
-  tasks:
-    - name: Update APT package cache
-      ansible.builtin.apt:
-        update_cache: true
-
-    - name: Install required packages
-      ansible.builtin.apt:
-        name:
-          - snapd
-          - nginx
-
-    - name: Start nginx service
-      ansible.builtin.service:
-        name: nginx
-        state: started
-        enabled: true
-
-    - name: Install Snapd Core
-      community.general.snap:
-        name:
-          - core
-
-    - name: Install Snapd Certbot
-      community.general.snap:
-        name:
-          - certbot
-        classic: true
-
-    - name: Install python3 nginx certbot
-      ansible.builtin.apt:
-        name:
-          - python3-certbot-nginx
-
-    - name: Generate HTTPS Certificate
-      register: generate_cert
-      changed_when: generate_cert.rc != 0
-      ansible.builtin.shell: |
-        certbot --nginx -n --agree-tos -d rhattox.ddns.net -m bruno02souto@gmail.com
-      args:
-        executable: /bin/bash
-
-    # - name: Enable Renew
-    #   register: renew_cert
-    #   changed_when: renew_cert.rc != 0
-    #   ansible.builtin.shell: |
-    #     certbot renew --dry-run
-    #   args:
-    #     executable: /bin/bash
-
-    - name: Configure Reverse Proxy
-      ansible.builtin.copy:
-        content: |
-          server {
-              listen [::]:80;
-              listen 80;
-              server_name rhattox.ddns.net;
-
-              location / {
-                  return 301 https://$host$request_uri;
-              }
-          }
-          server {
-            listen [::]:443 ssl ipv6only=on; # managed by Certbot
-            listen 443 ssl; # managed by Certbot
-            ssl_certificate /etc/letsencrypt/live/rhattox.ddns.net/fullchain.pem; # managed by Certbot
-            ssl_certificate_key /etc/letsencrypt/live/rhattox.ddns.net/privkey.pem; # managed by Certbot
-            include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-            ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-            server_name rhattox.ddns.net; # managed by Certbot
-            include /opt/nginx/*.conf;
-          }
-        dest: "/etc/nginx/sites-available/default"
-        owner: "{{ ansible_user_id  }}"
-        group: "{{ ansible_user_id }}"
-        mode: "0777"
-
-    - name: Create a symbolic link
-      ansible.builtin.file:
-        src: "/etc/nginx/sites-available/default"
-        dest: "/etc/nginx/sites-enabled/default"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
-        state: link
+  roles:
+    - certbot
+    - jenkins
+    - sonar
+    - nexus
