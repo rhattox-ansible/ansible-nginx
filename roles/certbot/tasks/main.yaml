@@ -34,7 +34,7 @@
   register: generate_cert
   changed_when: generate_cert.rc != 0
   ansible.builtin.shell: |
-    certbot --nginx -n --agree-tos -d {{ https_domain }} -m {{ domain_email }} --ipv6
+    certbot --nginx -n --agree-tos -d {{ https_domain }} -m {{ domain_email }}
   args:
     executable: /bin/bash
 

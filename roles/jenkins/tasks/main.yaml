@@ -13,3 +13,4 @@
     group: "root"
     mode: "0755"
     path: "/etc/nginx/sites-enabled/jenkins"
+    src: "/etc/nginx/sites-available/jenkins.conf"

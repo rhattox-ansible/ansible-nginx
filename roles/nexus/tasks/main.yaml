@@ -13,3 +13,4 @@
     group: "root"
     mode: "0755"
     path: "/etc/nginx/sites-enabled/nexus"
+    src: "/etc/nginx/sites-available/nexus.conf"
