@@ -16,5 +16,5 @@ server {
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
 
     server_name {{ https_domain }}; 
-    include /opt/nginx/*.conf;
+    include /etc/nginx/sites-available/*.conf;
 }
