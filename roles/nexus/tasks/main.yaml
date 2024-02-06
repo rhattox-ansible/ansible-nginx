@@ -5,12 +5,3 @@
     owner: "root"
     group: "root"
     mode: "0755"
-
-- name: Create Nexus Link
-  ansible.builtin.file:
-    state: link
-    owner: "root"
-    group: "root"
-    mode: "0755"
-    path: "/etc/nginx/sites-enabled/nexus"
-    src: "/etc/nginx/sites-available/nexus.conf"

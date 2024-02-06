@@ -5,12 +5,3 @@
     owner: "root"
     group: "root"
     mode: "0755"
-
-- name: Create sonar Link
-  ansible.builtin.file:
-    state: link
-    owner: "root"
-    group: "root"
-    mode: "0755"
-    path: "/etc/nginx/sites-enabled/sonar"
-    src: "/etc/nginx/sites-available/sonar.conf"
