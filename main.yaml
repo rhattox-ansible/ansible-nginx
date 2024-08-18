@@ -3,8 +3,10 @@
   become: true
   gather_facts: true
 
+# either nginx or certbot
   roles:
     - nginx
+    # - certbot
     - jenkins
     - sonar
     - nexus
