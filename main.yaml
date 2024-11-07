@@ -9,4 +9,5 @@
     # - certbot
     - jenkins
     - sonar
+    - grafana
     - nexus
