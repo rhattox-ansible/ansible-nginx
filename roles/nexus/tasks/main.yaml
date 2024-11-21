@@ -1,7 +1,0 @@
-- name: Configure Nexus Reverse Proxy
-  ansible.builtin.template:
-    src: roles/nexus/templates/nexus.conf.j2
-    dest: "/etc/nginx/sites-available/nexus.conf"
-    owner: "root"
-    group: "root"
-    mode: "0755"

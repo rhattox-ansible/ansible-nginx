@@ -7,7 +7,3 @@
   roles:
     - nginx
     # - certbot
-    - jenkins
-    - sonar
-    - grafana
-    - nexus

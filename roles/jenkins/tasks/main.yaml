@@ -1,7 +1,0 @@
-- name: Configure Jenkins Reverse Proxy
-  ansible.builtin.template:
-    src: roles/jenkins/templates/jenkins.conf.j2
-    dest: "/etc/nginx/sites-available/jenkins.conf"
-    owner: "root"
-    group: "root"
-    mode: "0755"

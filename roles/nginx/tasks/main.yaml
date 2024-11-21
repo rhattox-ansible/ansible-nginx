@@ -7,12 +7,6 @@
     name:
       - nginx
 
-- name: Start nginx service
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: true
-
 - name: Configure Reverse Proxy
   ansible.builtin.template:
     src: roles/nginx/templates/default.conf.j2
@@ -28,3 +22,10 @@
     owner: "root"
     group: "root"
     state: link
+
+- name: Start nginx service
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+
